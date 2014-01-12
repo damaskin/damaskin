@@ -2,40 +2,32 @@ require 'spec_helper'
 
 describe "StaticPages" do
 
-  describe "Home pages" do
-    it "should have the content 'Damaskin'" do
-      visit '/static_pages/home'
-      expect(page).to have_content('Damaskin')
-    end
+	let(:base_title) { "Damaskin" }
+  subject { page }
 
-    it "should have the title 'Home'" do
-    	visit '/static_pages/home'
-    	expect(page).to have_title("Damaskin | Home")
-    end
+  describe "Home pages" do
+  before {visit root_path}
+    it { should have_content('Damaskin') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title(' | Home') }
   end
 
   describe "Help pages" do
-    it "should have the content 'Help'" do
-      visit '/static_pages/help'
-      expect(page).to have_content('Help')
-    end
-
-    it "should have the title 'Help'" do
-    	visit '/static_pages/help'
-    	expect(page).to have_title("Damaskin | Help")
-    end
+    before {visit help_path}
+    it { should have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
 
   describe "About pages" do
-    it "should have the content 'About Us'" do
-      visit '/static_pages/about'
-      expect(page).to have_content('About Us')
-    end
+    before {visit about_path}
+    it { should have_content('About Us') }
+    it { should have_title(full_title('About Us')) }
+  end
 
-    it "should have the title 'About Us'" do
-    	visit '/static_pages/about'
-    	expect(page).to have_title("Damaskin | About Us")
-    end
+  describe "Contact pages" do
+    before {visit contact_path}
+    it { should have_content('Contact') }
+    it { should have_title(full_title('Contact')) }
   end
 
 end
